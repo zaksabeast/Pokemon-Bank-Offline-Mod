@@ -1,0 +1,43 @@
+name: Draft release
+
+on:
+  workflow_dispatch:
+
+permissions:
+  contents: write
+
+jobs:
+  canary-release:
+    name: Canary release
+    runs-on: ubuntu-latest
+    container: zaksabeast/devkitarm-rust
+
+    steps:
+      - name: Checkout code
+        uses: actions/checkout@v7
+
+      - name: Set up Rust
+        uses: dtolnay/rust-toolchain@master
+        with:
+          toolchain: nightly-2026-07-01
+          components: clippy,rust-src
+
+      - name: Build
+        run: make build
+
+      - name: Set build timestamp
+        run: echo "build_timestamp=$(date +'%Y-%m-%d %H:%M')" >> "$GITHUB_OUTPUT"
+        id: build_timestamp
+
+      - name: Set tag name
+        run: echo "tag_name=canary-$(date +'%Y-%m-%d-%H-%M')" >> "$GITHUB_OUTPUT"
+        id: tag_name
+
+      - name: Publish canary release
+        uses: softprops/action-gh-release@v3
+        with:
+          draft: true
+          prerelease: true
+          tag_name: ${{ steps.tag_name.outputs.tag_name }}
+          name: ${{ format('Canary {0}', steps.build_timestamp.outputs.build_timestamp) }}
+          files: build/plugin.3gx

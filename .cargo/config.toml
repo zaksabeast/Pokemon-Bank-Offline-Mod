@@ -1,0 +1,14 @@
+[target.armv6k-nintendo-3ds]
+linker = "/opt/devkitpro/devkitARM/bin/arm-none-eabi-gcc"
+rustflags = [
+    "-C", "link-arg=-T3gx.ld",
+    "-C", "link-arg=-mcpu=mpcore",
+    "-C", "link-arg=-mfloat-abi=hard",
+    "-C", "link-arg=-Wl,--gc-sections",
+    "-C", "link-arg=-Wl,--strip-discarded",
+    "-C", "link-arg=-Wl,--strip-debug",
+    "-C", "link-arg=-z",
+    "-C", "link-arg=noexecstack",
+    "-C", "link-arg=-L/opt/devkitpro/libctru/lib",
+    "-C", "link-arg=-lctru",
+]
