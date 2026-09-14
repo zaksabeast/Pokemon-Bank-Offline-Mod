@@ -44,5 +44,9 @@ pub fn install_offline_hooks() {
     mem::write(0x2a95b4, &0xe3a00005_u32); // mov        param_1,#0x5
     mem::write(0x2a95b8, &0xe320f000_u32); // nop
 
+    // Stub "Move To Home" and "Download Transporter" buttons
+    mem::write(0x2a6d08, &0x2a6d88_u32);
+    mem::write(0x2a6d00, &0x2a6d88_u32);
+
     redirect_bank_save_data_to_sd();
 }
