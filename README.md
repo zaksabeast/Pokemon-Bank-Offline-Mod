@@ -15,8 +15,8 @@ An offline mod for the original Pokemon Bank software, preserving its functional
 
 - **Network stubs** – This plugin stubs functions that involve network communication to make sure we're not accidentally sending data to official servers.
 - **Bank Save Redirect** – The Bank save (`turtle`), which has things like server provided data, is redirected to the SD. This ensures your actual Bank save is untouched in case you want to switch to online mode again.
-- **Stubbed Move To Home Button** – Obviously an offline bank can't transfer to home, so this button is will just exit bank. Pressing this didn't cause issues during testing, but I wanted to prevent unexpected scenarios.
-- **Stubbed Download Transporter Button** – Similar to the above, this wasn't an issue in testing, but I wanted to prevent odd scenarios.
+- **Stubbed Move To Home Button** – Obviously an offline bank can't transfer to home, so this button will just exit bank. Pressing this didn't cause issues during testing, but I wanted to prevent unexpected scenarios.
+- **Stubbed Download Transporter Button** – Similar to the above, this wasn't an issue while testing, but I wanted to prevent odd scenarios.
 
 ## Before You Start
 
