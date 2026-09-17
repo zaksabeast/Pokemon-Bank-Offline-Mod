@@ -19,17 +19,22 @@ pub struct PluginHeader {
     pub is_default_plugin: u32,
     pub plgldr_event: *mut i32,
     pub plgldr_reply: *mut i32,
-    pub reserved: [u32; 24],
+    pub notify_home_event: u8,
+    pub padding: [u8; 7],
+    pub wait_for_reply_timeout: u64,
+    pub reserved: [u32; 20],
     pub config: [u32; 32],
 }
+
+const WAIT_FOR_REPLY_TIMEOUT_NS: u64 = 1_000_000_000;
 
 static mut PLGLDR_HANDLE: Handle = Handle(0);
 static mut PLGLDR_ARBITER: Handle = Handle(0);
 static mut PLG_EVENT: *mut i32 = core::ptr::null_mut();
 static mut PLG_REPLY: *mut i32 = core::ptr::null_mut();
 
-pub fn get_header() -> &'static PluginHeader {
-    unsafe { &*(0x07000000 as *const PluginHeader) }
+pub fn get_header() -> &'static mut PluginHeader {
+    unsafe { &mut *(0x07000000 as *mut PluginHeader) }
 }
 
 fn get_arbiter(service: Handle) -> CtrResult<Handle> {
@@ -55,6 +60,7 @@ pub fn init() -> CtrResult<()> {
     unsafe {
         PLG_EVENT = header.plgldr_event;
         PLG_REPLY = header.plgldr_reply;
+        header.wait_for_reply_timeout = WAIT_FOR_REPLY_TIMEOUT_NS;
     };
 
     Ok(())
@@ -115,6 +121,7 @@ fn handle_event() {
     match event {
         AboutToSwap => {
             let plg_event = unsafe { PLG_EVENT } as u32;
+            send_event(Wait);
             let _ = arbitrate_address(
                 arbiter,
                 plg_event,
