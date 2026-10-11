@@ -1,3 +1,7 @@
+> [!WARNING]
+> This project is deprecated and no longer maintained. It has been superseded by [Wokann's Offline Bank & Transporter Mod](https://github.com/Wokann/bank_and_mover_offline_patch), which does much more than I had planned.
+> Please download that instead!
+
 # Pokemon Bank Offline Mod
 
 An offline mod for the original Pokemon Bank software, preserving its functionality beyond the shutdown of Nintendo's online services.
