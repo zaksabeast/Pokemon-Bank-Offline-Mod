@@ -2,6 +2,17 @@
 > This project is deprecated and no longer maintained. It has been superseded by [Wokann's Offline Bank & Transporter Mod](https://github.com/Wokann/bank_and_mover_offline_patch), which does much more than I had planned.
 > Please download that instead!
 
+Migrating to Wokann's patch:
+
+1. Back up `/3ds/PokemonBankOffline/` (and `/3ds/Bank/` if it exists).
+2. Delete `/luma/plugins/00040000000C9B00/plugin.3gx`.
+3. Install Wokann's patch.
+4. Create `/3ds/Bank/` if it doesn't exist.
+5. Copy `/3ds/PokemonBankOffline/bank_data.bin` to `/3ds/Bank/bankdata.bin`.
+6. Copy `/3ds/PokemonBankOffline/sav.bin` to `/3ds/Bank/sav.bin`.
+
+---
+
 # Pokemon Bank Offline Mod
 
 An offline mod for the original Pokemon Bank software, preserving its functionality beyond the shutdown of Nintendo's online services.
